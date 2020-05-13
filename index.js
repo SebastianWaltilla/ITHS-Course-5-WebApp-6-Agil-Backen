@@ -15,9 +15,9 @@ express()
     .get('/db', async (req, res) => {
         try {
             const client = await pool.connect()
-            const result = await client.query('SELECT * FROM teacher');
-            const results = { 'results': (result) ? result.rows : null};
-            res.render('pages/db', results );
+            const result = await client.query('SELECT * FROM teacher WHERE rumskod = hajen);
+            //const results = { 'results': (result) ? result.rows : null};
+            res.send(result);
             client.release();
         } catch (err) {
             console.error(err);
