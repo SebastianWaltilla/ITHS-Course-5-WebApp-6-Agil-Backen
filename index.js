@@ -38,15 +38,14 @@ express()
         }
     })
 
-"someParam1=foo&someParam1=bar&someParam1=bas"
 
 
 
-    .post('/creategame?room={room}&gamecode={gamecode}', async (req, res) => {
+    .post('/creategame', async (req, res) => {
             try {
                 const client = await pool.connect()
-                var room = req.query.room;
-                var gamecode = req.query.gamecode;
+                var room = req.body.room;
+                var gamecode = req.body.gamecode;
                 const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                 const results = { 'results': (result) ? result.rows : null};
                 res.render('pages/winner', results );
