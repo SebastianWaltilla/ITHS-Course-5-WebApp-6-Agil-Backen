@@ -42,7 +42,7 @@ express()
 
 
 
-    .post('/creategame?room=?&gamecode=?', async (req, res) => {
+    .post('/creategame?room={room}&gamecode={gamecode}', async (req, res) => {
             try {
                 const client = await pool.connect()
                 var room = req.params.room;
