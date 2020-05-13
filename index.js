@@ -45,9 +45,9 @@ express()
     .post('/creategame?room={room}&gamecode={gamecode}', async (req, res) => {
             try {
                 const client = await pool.connect()
-                var room = req.params.room;
-                var gamecode = req.params.gamecode;
-                const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode + "')" );
+                var room = req.query.room;
+                var gamecode = req.query.gamecode;
+                const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                 const results = { 'results': (result) ? result.rows : null};
                 res.render('pages/winner', results );
                 client.release();
