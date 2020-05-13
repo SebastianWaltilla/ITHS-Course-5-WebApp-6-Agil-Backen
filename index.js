@@ -9,7 +9,8 @@ const pool = new Pool({
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
+    .use(express.bodyParser())
+    .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
     .get('/db/:room', async (req, res) => {
@@ -45,6 +46,7 @@ express()
             try {
                 const client = await pool.connect()
                 var room = req.body.room;
+                console.log(req)
                 var gamecode = req.body.gamecode;
                 const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                 const results = { 'results': (result) ? result.rows : null};
