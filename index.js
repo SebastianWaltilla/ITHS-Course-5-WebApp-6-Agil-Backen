@@ -24,6 +24,18 @@ express()
             res.send("Error " + err);
         }
     })
+    .get('/winner', async (req, res) => {
+        try {
+            const client = await pool.connect()
+            const result = await client.query('SELECT * FROM student');
+            const results = { 'results': (result) ? result.rows : null};
+            res.render('pages/winner', results );
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    })
     .listen(PORT, () => console.log(`Listening on ${ PORT }`)) //<---denna raden ska ligga sist
 
 
