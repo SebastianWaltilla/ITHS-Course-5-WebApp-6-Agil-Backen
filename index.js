@@ -15,7 +15,7 @@ express()
     .get('/db', async (req, res) => {
         try {
             const client = await pool.connect()
-            const result = await client.query('SELECT * FROM teacher WHERE rumskod = hajen);
+            const result = await client.query('SELECT spelkod FROM teacher WHERE rumskod is 'hajen');
             //const results = { 'results': (result) ? result.rows : null};
             res.send(result);
             client.release();
