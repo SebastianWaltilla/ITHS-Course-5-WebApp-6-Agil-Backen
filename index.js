@@ -3,13 +3,12 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 const { Pool } = require('pg');
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
+    connectionString: process.env.DATABASE_URL || 'postgresql://jteascrgevmsmm:a7ed6c2ec0f336ae9124c0cbb5452bd68c1f7c3a828b19bfcee2d6cad821eebe@localhost:5000/d307bgdakulge0',
+    ssl: !!process.env.DATABASE_URL
 });
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-    .use(express.bodyParser())
     .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
@@ -50,7 +49,7 @@ express()
                 var gamecode = req.body.gamecode;
                 const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                 const results = { 'results': (result) ? result.rows : null};
-                res.render('pages/winner', results );
+                res.send('SUCCESS');
                 client.release();
             } catch (err) {
                 console.error(err);
