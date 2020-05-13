@@ -10,11 +10,11 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
-<h2>Database Results</h2>
+<h2>Hungry for math - Database Result</h2>
 
 <ul>
     <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.name %></li>
+        <li><%= r.rumskod %> - <%= r.spelkod %></li>
     <% }); %>
 </ul>
 
