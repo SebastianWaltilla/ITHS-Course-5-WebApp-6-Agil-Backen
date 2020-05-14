@@ -78,8 +78,7 @@ express()
                 var totaltime = req.body.totaltime
 
                 const result = await client.query
-                ("INSERT INTO student(correctanswers, totaltime) " +
-                    "VALUES(" + correctanswers + "," + totaltime + ")" +
+                ("UPDATE student SET correctanswers=" + correctanswers + ", totaltime=" + totaltime  +
                     " WHERE nickname = " + nickname + " AND room = " + room );
                 res.send('SUCCESS send result ');
                 client.release();
