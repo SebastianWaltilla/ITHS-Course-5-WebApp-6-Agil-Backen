@@ -24,7 +24,13 @@ express()
                 var room = req.body.room;
                 console.log(room)
                 var gamecode = req.body.gamecode;
-                const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
+
+                const check = await client.query("select count(room) from student where room = '" + room + "'");
+
+                    if ( 0 === check){
+                        const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
+                    }
+
                 const results = { 'results': (result) ? result.rows : null};
                 res.send('SUCCESS');
                 client.release();
