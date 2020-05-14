@@ -28,7 +28,7 @@ express()
 
                 var check = await client.query("select spelkod from teacher where rumskod = '" + room + "' limit 1");
                 console.log(check + ' = var check &&&&&&&&&&&&&&&&&&&&&&&&&');
-                    if ( check == null){
+                    if ( check.rows.length === 0){
                         console.log('in if-sats 0 === check ------------- check =  ' + check)
                         var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                         res.send('SUCCESS');
