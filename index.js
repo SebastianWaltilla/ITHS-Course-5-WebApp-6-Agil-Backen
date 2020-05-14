@@ -20,6 +20,7 @@ express()
     // Teacher creates a new game, with room code, and generated gamecode
     .post('/creategame', async (req, res) => {
             try {
+                console.log('!!!!!!!! in create game post')
                 const client = await pool.connect()
                 var room = req.body.room;
                 console.log(room)
@@ -28,11 +29,13 @@ express()
                 const check = await client.query("select count(room) from student where room = '" + room + "'");
 
                     if ( 0 === check){
+                        console.log('in if-sats 0 === check -------------')
                         const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                         res.send('SUCCESS');
                     }
 
-                    else if (check > 0){
+                    else {
+                        console.log('in else 0 > check -------------')
                         res.send('Room already exists, choose other roomcode');
                     }
 
