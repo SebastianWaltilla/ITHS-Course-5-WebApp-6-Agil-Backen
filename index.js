@@ -4,12 +4,11 @@ const PORT = process.env.PORT || 5000;
 const { Pool } = require('pg');
 var bodyParser = require('body-parser')
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL || 'postgresql://jteascrgevmsmm:a7ed6c2ec0f336ae9124c0cbb5452bd68c1f7c3a828b19bfcee2d6cad821eebe@localhost:5000/d307bgdakulge0',
-    ssl: !!process.env.DATABASE_URL
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
-pool.on('error', (err) => {
-    console.error('An idle client has experienced an error', err.stack)
-})
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
