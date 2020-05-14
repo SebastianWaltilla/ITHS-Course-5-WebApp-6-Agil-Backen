@@ -79,7 +79,7 @@ express()
 
                 const result = await client.query
                 ("UPDATE student SET correctanswers=" + correctanswers + ", totaltime=" + totaltime  +
-                    " WHERE nickname = " + nickname + " AND room = " + room );
+                    " WHERE nickname = '" + nickname + "' AND room = '" + room +"'");
                 res.send('SUCCESS send result ');
                 client.release();
             } catch (err) {
