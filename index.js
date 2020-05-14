@@ -28,14 +28,14 @@ express()
 
                 var check = await client.query("select count(room) from student where room = '" + room + "'");
                 console.log(check + ' = var check &&&&&&&&&&&&&&&&&&&&&&&&&');
-                    if ( parseInt(check) === 0){
-                        console.log('in if-sats 0 === check -------------' + check)
+                    if ( parseInt(check) == 0){
+                        console.log('in if-sats 0 === check ------------- check =  ' + check)
                         var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                         res.send('SUCCESS');
                     }
 
                     else {
-                        console.log('in else 0 > check -------------')
+                        console.log('in else 0 > check ------------- check = ' + check)
                         res.send('Room already exists, choose other roomcode');
                     }
 
