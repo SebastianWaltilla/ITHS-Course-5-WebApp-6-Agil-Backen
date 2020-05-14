@@ -29,10 +29,14 @@ express()
 
                     if ( 0 === check){
                         const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
+                        res.send('SUCCESS');
                     }
 
-                const results = { 'results': (result) ? result.rows : null};
-                res.send('SUCCESS');
+                    else if (check > 0){
+                        res.send('Room already exists, choose other roomcode');
+                    }
+
+
                 client.release();
             } catch (err) {
                 console.error(err);
