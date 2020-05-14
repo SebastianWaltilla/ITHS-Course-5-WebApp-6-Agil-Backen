@@ -26,11 +26,11 @@ express()
                 console.log(room)
                 var gamecode = req.body.gamecode;
 
-                const check = await client.query("select count(room) from student where room = '" + room + "'");
-
-                    if ( 0 === check){
+                var check = await client.query("select count(room) from student where room = '" + room + "'");
+                console.log(check);
+                    if ( check === 0){
                         console.log('in if-sats 0 === check -------------')
-                        const result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
+                        var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                         res.send('SUCCESS');
                     }
 
