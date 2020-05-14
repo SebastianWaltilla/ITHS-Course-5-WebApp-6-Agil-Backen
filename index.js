@@ -54,22 +54,40 @@ express()
     })
 
     .post('/studentlogin', async (req, res) => {
+        try {
+            const client = await pool.connect()
+            var room = req.body.room
+            var nickname = req.body.nickname;
+
+            const result = await client.query("INSERT INTO student values ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
+            res.send('SUCCESS send student login');
+            client.release();
+        } catch (err) {
+            console.error(err);
+            console.log(req.body.nickname + ' = req.body.nick');
+            res.send("Error in post method: " + err);
+        }
+    }
+    )
+    .post('/studentresult', async (req, res) => {
             try {
                 const client = await pool.connect()
                 var room = req.body.room
                 var nickname = req.body.nickname;
+                var correctanswers = req.body.correctanswers
+                var totaltime = req.body.totaltime
 
-                const result = await client.query("INSERT INTO student values ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
-                res.send('SUCCESS send student login');
+                const result = await client.query
+                ("INSERT INTO student values ('" + nickname + "'," + correctanswers + "," + totaltime + ",'" + room +"')" );
+                res.send('SUCCESS send result ');
                 client.release();
             } catch (err) {
                 console.error(err);
-                console.log(req.body.nickname + ' = req.body.nick');
+                console.log(req.body.totaltime + ' = req.body.time');
                 res.send("Error in post method: " + err);
             }
         }
     )
-
 
 
 
