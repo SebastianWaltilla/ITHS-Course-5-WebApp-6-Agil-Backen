@@ -26,9 +26,9 @@ express()
                 console.log('This is the name of the room in request: ' + room)
                 var gamecode = req.body.gamecode;
 
-                var check = await client.query("select * from teacher where rumskod = '" + room + "' limit 1");
+                var check = await client.query("select spelkod from teacher where rumskod = '" + room + "' limit 1");
                 console.log(check + ' = var check &&&&&&&&&&&&&&&&&&&&&&&&&');
-                    if ( check != room){
+                    if ( check == null){
                         console.log('in if-sats 0 === check ------------- check =  ' + check)
                         var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                         res.send('SUCCESS');
