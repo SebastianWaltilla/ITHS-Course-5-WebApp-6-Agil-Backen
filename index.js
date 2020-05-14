@@ -80,7 +80,7 @@ express()
                 const result = await client.query
                 ("INSERT INTO student(correctanswers, totaltime) " +
                     "VALUES(" + correctanswers + "," + totaltime + ")" +
-                    " WHERE nickname = " + nickname + " AND room = " + room )
+                    " WHERE nickname = " + nickname + " AND room = " + room );
                 res.send('SUCCESS send result ');
                 client.release();
             } catch (err) {
