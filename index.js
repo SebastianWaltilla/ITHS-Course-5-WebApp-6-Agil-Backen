@@ -16,35 +16,8 @@ express()
     .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-    .get('/db/:room', async (req, res) => {
-        try {
-            var room = req.params.room;
-            const client = await pool.connect()
-            const result = await client.query("SELECT spelkod FROM teacher WHERE rumskod = '" + room + "'");
-            //const results = { 'results': (result) ? result.rows : null};
-            res.send(result);
-            client.release();
-        } catch (err) {
-            console.error(err);
-            res.send("Error " + err);
-        }
-    })
-    .get('/winner', async (req, res) => {
-        try {
-            const client = await pool.connect()
-            const result = await client.query('SELECT * FROM student');
-            const results = { 'results': (result) ? result.rows : null};
-            res.render('pages/winner', results );
-            client.release();
-        } catch (err) {
-            console.error(err);
-            res.send("Error " + err);
-        }
-    })
 
-
-
-
+    // Teacher creates a new game, with room code, and generated gamecode
     .post('/creategame', async (req, res) => {
             try {
                 const client = await pool.connect()
@@ -61,8 +34,60 @@ express()
                 res.send("Error in post method: " + err);
             }
         }
-
     )
+
+
+    // Student
+    // get spelkod by rumskod
+    .get('/db/:room', async (req, res) => {
+        try {
+            var room = req.params.room;
+            const client = await pool.connect()
+            const result = await client.query("SELECT spelkod FROM teacher WHERE rumskod = '" + room + "'");
+            //const results = { 'results': (result) ? result.rows : null};
+            res.send(result);
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    })
+
+    .post('/studentlogin', async (req, res) => {
+            try {
+                const client = await pool.connect()
+                var room = req.body.room
+                var nickname = req.body.nickname;
+
+                const result = await client.query("INSERT INTO student values ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
+                res.send('SUCCESS send student login');
+                client.release();
+            } catch (err) {
+                console.error(err);
+                console.log(req.body.nickname + ' = req.body.nick');
+                res.send("Error in post method: " + err);
+            }
+        }
+    )
+
+
+
+
+
+
+    .get('/winner', async (req, res) => {
+        try {
+            const client = await pool.connect()
+            const result = await client.query('SELECT * FROM student');
+            const results = { 'results': (result) ? result.rows : null};
+            res.render('pages/winner', results );
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    })
+
     .listen(PORT, () => console.log(`!!Listening on ${ PORT }`)) //<---denna raden ska ligga sist
 
 
