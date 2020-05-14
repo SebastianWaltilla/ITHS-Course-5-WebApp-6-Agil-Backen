@@ -69,7 +69,7 @@ express()
         }
     }
     )
-    .post('/studentresult', async (req, res) => {
+    .put('/studentresult', async (req, res) => {
             try {
                 const client = await pool.connect()
                 var room = req.body.room
@@ -78,7 +78,9 @@ express()
                 var totaltime = req.body.totaltime
 
                 const result = await client.query
-                ("INSERT INTO student values ('" + nickname + "'," + correctanswers + "," + totaltime + ",'" + room +"')" );
+                ("INSERT INTO student(correctanswers, totaltime) " +
+                    "VALUES(" + correctanswers + "," + totaltime + ")" +
+                    " WHERE nickname = '" + nickname + "' and room = '" + room "')")
                 res.send('SUCCESS send result ');
                 client.release();
             } catch (err) {
