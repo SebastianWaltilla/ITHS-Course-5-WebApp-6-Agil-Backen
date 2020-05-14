@@ -27,7 +27,7 @@ express()
                 var gamecode = req.body.gamecode;
 
                 var check = await client.query("select count(room) from student where room = '" + room + "'");
-                console.log(check);
+                console.log(check + ' = var check &&&&&&&&&&&&&&&&&&&&&&&&&');
                     if ( check === 0){
                         console.log('in if-sats 0 === check -------------')
                         var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
