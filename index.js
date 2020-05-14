@@ -23,12 +23,12 @@ express()
                 console.log('!!!!!!!! in create game post')
                 const client = await pool.connect()
                 var room = req.body.room;
-                console.log(room)
+                console.log('This is the name of the room in request: ' + room)
                 var gamecode = req.body.gamecode;
 
-                var check = await client.query("select count(room) from student where room = '" + room + "'");
+                var check = await client.query("select room from teacher where room = '" + room + "' limit 1");
                 console.log(check + ' = var check &&&&&&&&&&&&&&&&&&&&&&&&&');
-                    if ( check.row.count == 0){
+                    if ( check != room){
                         console.log('in if-sats 0 === check ------------- check =  ' + check)
                         var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                         res.send('SUCCESS');
