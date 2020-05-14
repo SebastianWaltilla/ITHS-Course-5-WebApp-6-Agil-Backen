@@ -35,7 +35,7 @@ express()
                     }
 
                     else {
-                        console.log('in else 0 > check ------------- check = ' + check)
+                        console.log('in else 0 > check ------------- check.rows.length = ' + check.rows.length)
                         res.send('Room already exists, choose other roomcode');
                     }
 
