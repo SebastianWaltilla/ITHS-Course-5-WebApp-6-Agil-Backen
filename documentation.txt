@@ -55,6 +55,34 @@ statuskod:
 
 GET /v1/winner
 Skickar allas resultat tillsammans med sina nicknames
+Rumskoden skickas med som jsonobjekt i requestbody
+
+Om correctanswers och totaltime = -1 betyder det att spelaren inte skickat in sina resultat ännu.
+
+En array skickas tillbaka:
+
+{
+  "results": [
+    {
+      "nickname": "Luis",
+      "correctanswers": "666",
+      "totaltime": "666",
+      "room": "RaufGodlike"
+    },
+    {
+      "nickname": "Luis",
+      "correctanswers": "-1",
+      "totaltime": "-1",
+      "room": "RaufGodlike"
+    },
+    {
+      "nickname": "LuisTVA",
+      "correctanswers": "-1",
+      "totaltime": "-1",
+      "room": "RaufGodlike"
+    }
+  ]
+}
 
 
 
