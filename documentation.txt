@@ -4,6 +4,8 @@ statuskod:
 200 SUCCESS
 403 Room code already exists
 
+OBS! rumskoden får inte innehålla mellanslag !!!!!!!!!!!!!!!!!!!!!!!
+
 {
 	"room": "klass3b",
 	"gamecode" : "1234345678"
@@ -13,11 +15,16 @@ statuskod:
 
 GET /v1/room/annikasspel1 <----rumskod
 Här hämtar eleven den genererade spelkoden som tillhör rummet från "gametable"
-
+Skickas tillbaka som en
 
 
 POST /v1/createplayer
-Här skickas playerns nickname tillsammans med rumskod som json i requestbody till tabellen "playertable"
+Här skickas playerns nickname tillsammans med rumskod
+som json i requestbody till tabellen "playertable"
+statuskod:
+201 User with *nickname* created
+
+OBS! nickname kan innehålla mellanslag
 
 {
 	"room": "klass3b",
@@ -42,3 +49,21 @@ statuskod:
 
 GET /v1/winner
 Skickar allas resultat tillsammans med sina nicknames
+
+
+
+Databas:
+
+table:
+gametable
+rows:
+room (text)
+gamecode (text)
+
+table:
+playertable
+rows:
+nickname (text)
+correctanswers (integer)
+totaltime (decimal)
+room (text)

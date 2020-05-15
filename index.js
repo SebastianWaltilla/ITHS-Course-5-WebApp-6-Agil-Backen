@@ -24,7 +24,7 @@ express()
                 var room = req.body.room;
                 var gamecode = req.body.gamecode;
 
-                var check = await client.query("select spelkod from teacher where rumskod = '" + room + "' limit 1");
+                var check = await client.query("select gamecode from gametable where room = '" + room + "' limit 1");
                     if ( check.rows.length === 0){
                         var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
                         res.status(200).send('SUCCESS');
