@@ -18,7 +18,7 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
 
     // Teacher creates a new game, with room code, and generated gamecode
-    .post('/creategame', async (req, res) => {
+    .post('/v1/creategame', async (req, res) => {
             try {
                 const client = await pool.connect()
                 var room = req.body.room;
@@ -44,7 +44,7 @@ express()
 
     // Student
     // get spelkod by rumskod
-    .get('/db/:room', async (req, res) => {
+    .get('/v1/room/:room', async (req, res) => {
         try {
             var room = req.params.room;
             const client = await pool.connect()
@@ -58,7 +58,7 @@ express()
         }
     })
 
-    .post('/studentlogin', async (req, res) => {
+    .post('/v1/createplayer', async (req, res) => {
         try {
             const client = await pool.connect()
             var room = req.body.room
@@ -74,7 +74,7 @@ express()
         }
     }
     )
-    .put('/studentresult', async (req, res) => {
+    .put('/v1/playerresult', async (req, res) => {
             try {
                 const client = await pool.connect()
                 var room = req.body.room
@@ -99,7 +99,7 @@ express()
 
 
 
-    .get('/winner', async (req, res) => {
+    .get('/v1/winner', async (req, res) => {
         try {
             const client = await pool.connect()
             const result = await client.query('SELECT * FROM student');

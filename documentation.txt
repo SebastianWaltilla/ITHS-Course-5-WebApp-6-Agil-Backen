@@ -1,0 +1,17 @@
+POST /v1/creategame
+Här skickar vi med rumskod och en genererad spelkod som jsonbody
+200 OK eller
+403 Room code already exists
+
+{
+	"room": "klass3b",
+	"gamecode" : "1234345678"
+}
+
+GET /v1/room/annikasspel1 <----rumskod
+Här hämtar eleven den genererade spelkoden som tillhör rummet
+
+
+
+POST /v1/createplayer
+Här skickas elevens nickname tillsammans med rumskod som jsonbody till databasen
