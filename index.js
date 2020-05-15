@@ -48,9 +48,9 @@ express()
         try {
             var room = req.params.room;
             const client = await pool.connect()
-            const result = await client.query("SELECT spelkod FROM teacher WHERE rumskod = '" + room + "'");
+            const result = await client.query("SELECT gamecode FROM gametable WHERE room = '" + room + "'");
             //const results = { 'results': (result) ? result.rows : null};
-            res.send(result);
+            res.send(result.rows[0]);
             client.release();
         } catch (err) {
             console.error(err);
@@ -64,7 +64,7 @@ express()
             var room = req.body.room
             var nickname = req.body.nickname;
 
-            const result = await client.query("INSERT INTO student values ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
+            const result = await client.query("INSERT INTO playertable values ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
             res.status(201).send("User with nickname " + nickname + " created");
             client.release();
         } catch (err) {
@@ -83,7 +83,7 @@ express()
                 var totaltime = req.body.totaltime
 
                 const result = await client.query
-                ("UPDATE student SET correctanswers=" + correctanswers + ", totaltime=" + totaltime  +
+                ("UPDATE playertable SET correctanswers=" + correctanswers + ", totaltime=" + totaltime  +
                     " WHERE nickname = '" + nickname + "' AND room = '" + room +"'");
                 res.status(200).send('SUCCESS send result ');
                 client.release();
@@ -102,7 +102,7 @@ express()
     .get('/v1/winner', async (req, res) => {
         try {
             const client = await pool.connect()
-            const result = await client.query('SELECT * FROM student');
+            const result = await client.query('SELECT * FROM playertable');
             const results = { 'results': (result) ? result.rows : null};
             res.render('pages/winner', results );
             client.release();
