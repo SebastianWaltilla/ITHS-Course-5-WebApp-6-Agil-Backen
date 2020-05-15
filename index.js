@@ -26,7 +26,7 @@ express()
 
                 var check = await client.query("select gamecode from gametable where room = '" + room + "' limit 1");
                     if ( check.rows.length === 0){
-                        var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
+                        var result = await client.query("INSERT INTO gametable values ('" + room + "','" + gamecode +  "')" );
                         res.status(200).send('SUCCESS');
                     }
                     else {
