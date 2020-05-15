@@ -15,7 +15,13 @@ OBS! rumskoden får inte innehålla mellanslag !!!!!!!!!!!!!!!!!!!!!!!
 
 GET /v1/room/annikasspel1 <----rumskod
 Här hämtar eleven den genererade spelkoden som tillhör rummet från "gametable"
-Skickas tillbaka som en
+Skickas tillbaka som ett jsonobjekt:
+
+{
+  "gamecode": "3T6,3T5,3T6,4T7,6T8"
+}
+
+
 
 
 POST /v1/createplayer

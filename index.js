@@ -64,8 +64,21 @@ express()
             var room = req.body.room
             var nickname = req.body.nickname;
 
-            const result = await client.query("INSERT INTO playertable values ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
+            //Check that the room is created in gametable and if nickname already exists
+            var checkRoom = await client.query("SELECT room FROM gametable WHERE room = '" + room + "' limit 1");
+            var checkNickname = await client.query("SELECT nickname FROM playertable WHERE nickname = '" + nickname + "' limit 1");
+            if(checkRoom.rows.length === 1 && checkNickname.rows.length === 0 ){
+
+            const result = await client.query("INSERT INTO playertable VALUES ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
             res.status(201).send("User with nickname " + nickname + " created");
+
+            }
+
+            else {
+                res.status(404).send("Room code does not match any existing room or nickname already exists");
+            }
+
+
             client.release();
         } catch (err) {
             console.error(err);
