@@ -20,30 +20,22 @@ express()
     // Teacher creates a new game, with room code, and generated gamecode
     .post('/creategame', async (req, res) => {
             try {
-                console.log('!!!!!!!! in create game post')
                 const client = await pool.connect()
                 var room = req.body.room;
-                console.log('This is the name of the room in request: ' + room)
                 var gamecode = req.body.gamecode;
 
                 var check = await client.query("select spelkod from teacher where rumskod = '" + room + "' limit 1");
-                console.log(check + ' = var check &&&&&&&&&&&&&&&&&&&&&&&&&');
                     if ( check.rows.length === 0){
-                        console.log('in if-sats 0 === check ------------- check.rows.length =  ' + check.rows.length)
                         var result = await client.query("INSERT INTO teacher values ('" + room + "','" + gamecode +  "')" );
-                        res.send('SUCCESS');
+                        res.status(200).send('SUCCESS');
                     }
-
                     else {
-                        console.log('in else 0 > check ------------- check.rows.length = ' + check.rows.length)
-                        res.send('Room already exists, choose other roomcode');
-                    }
+                        res.status(403).send("Room code already exists");                    }
 
 
                 client.release();
             } catch (err) {
                 console.error(err);
-                console.log(req.body.room + ' = req.body.room');
                 res.send("Error in post method: " + err);
             }
         }
@@ -73,7 +65,7 @@ express()
             var nickname = req.body.nickname;
 
             const result = await client.query("INSERT INTO student values ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
-            res.send('SUCCESS send student login');
+            res.status(201).send("User with nickname " + nickname + " created");
             client.release();
         } catch (err) {
             console.error(err);
@@ -93,7 +85,7 @@ express()
                 const result = await client.query
                 ("UPDATE student SET correctanswers=" + correctanswers + ", totaltime=" + totaltime  +
                     " WHERE nickname = '" + nickname + "' AND room = '" + room +"'");
-                res.send('SUCCESS send result ');
+                res.status(200).send('SUCCESS send result ');
                 client.release();
             } catch (err) {
                 console.error(err);
