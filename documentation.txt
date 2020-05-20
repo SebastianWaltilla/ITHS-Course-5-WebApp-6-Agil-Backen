@@ -7,8 +7,8 @@ statuskod:
 OBS! rumskoden får inte innehålla mellanslag !!!!!!!!!!!!!!!!!!!!!!!
 
 {
-	"room": "klass3b",
-	"gamecode" : "1234345678"
+	"room": "annikasspel1",
+	"gamecode" : "12, 13, 5, 8"
 }
 
 
@@ -18,7 +18,7 @@ Här hämtar eleven den genererade spelkoden som tillhör rummet från "gametabl
 Skickas tillbaka som ett jsonobjekt:
 
 {
-  "gamecode": "3T6,3T5,3T6,4T7,6T8"
+  "gamecode": "12, 13, 5, 8"
 }
 
 
