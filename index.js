@@ -54,9 +54,9 @@ express()
 
     // Student
     // get spelkod by rumskod
-    .get('/v1/room/:room', async (req, res) => {
+    .get('/v1/room/', async (req, res) => {
         try {
-            var room = req.params.room;
+            var room = req.query.room;
             const client = await pool.connect()
             const result = await client.query("SELECT gamecode FROM gametable WHERE room = '" + room + "'");
             //const results = { 'results': (result) ? result.rows : null};
