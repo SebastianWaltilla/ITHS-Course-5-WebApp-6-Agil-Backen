@@ -144,7 +144,7 @@ express()
             const counter = result;
             //const increase = result + 1;
             //const result2 = await client.query("UPDATE ping SET counter = " + increase + " WHERE id=1");
-            const results = { 'counter': (counter) ? result.rows : null};
+            const results = { 'Hej': (counter) ? result.rows : null};
             res.send(results);
             client.release();
         } catch (err) {
