@@ -116,8 +116,8 @@ express()
             const result = await client.query(
                 "SELECT * FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers DESC, totaltime DESC;"
             );
-            //const results = { 'results': (result) ? result.rows : null};
-            res.send(result);
+            const results = { 'results': (result) ? result.rows : null};
+            res.send(results);
             client.release();
         } catch (err) {
             console.error(err);
