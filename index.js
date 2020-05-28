@@ -112,9 +112,9 @@ express()
     .get('/v1/winner', async (req, res) => {
         try {
             const client = await pool.connect()
-            var room = req.body.room;
+            var room = req.query.room;
             const result = await client.query(
-                "SELECT * FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers DESC, totaltime DESC" );
+                "SELECT * FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers DESC, totaltime ASC" );
             const results = { 'results': (result) ? result.rows : null};
             res.send(results);
             client.release();
