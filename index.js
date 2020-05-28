@@ -145,14 +145,34 @@ express()
             const counter = result.counter;
             //const increase = result + 1;
             //const result2 = await client.query("UPDATE ping SET counter = " + increase + " WHERE id=1");
-            const results = { 'Hej': (counter) ? addone : null};
-            res.send(results);
+            //const results = { 'Hej': (counter) ? addone : null};
+            res.send(addone);
             client.release();
         } catch (err) {
             console.error(err);
             res.send("Error " + err);
         }
     })
+
+
+
+    // Student
+    // get spelkod by rumskod
+    .get('/v1/room/', async (req, res) => {
+        try {
+            var room = req.query.room;
+            const client = await pool.connect()
+            const result = await client.query("SELECT gamecode FROM gametable WHERE room = '" + room + "'");
+            //const results = { 'results': (result) ? result.rows : null};
+            res.send(result.rows[0]);
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    })
+
+
 
     .listen(PORT, () => console.log(`!!Listening on ${ PORT }`)) //<---denna raden ska ligga sist
 
