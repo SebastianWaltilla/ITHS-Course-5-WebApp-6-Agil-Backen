@@ -109,13 +109,15 @@ express()
         }
     )
 
-    .get('/v1/winner', async (req, res) => {
+    .get('/v1/winner/', async (req, res) => {
         try {
             const client = await pool.connect()
-            var room = req.body.room;
-            const result = await client.query("SELECT * FROM playertable WHERE room = '" + room + "'" );
-            const results = { 'results': (result) ? result.rows : null};
-            res.send(results);
+            var room = req.query.room;
+            const result = await client.query(
+                "SELECT * FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers DESC, totaltime DESC;"
+            );
+            //const results = { 'results': (result) ? result.rows : null};
+            res.send(result.rows[0]);
             client.release();
         } catch (err) {
             console.error(err);
