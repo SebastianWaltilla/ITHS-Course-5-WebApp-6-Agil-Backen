@@ -11,14 +11,6 @@ const pool = new Pool({
     }
 });
 
-
-
-
-
-
-
-
-
 express()
   .use(express.static(path.join(__dirname, 'public')))
     .use(bodyParser.json())
@@ -50,7 +42,6 @@ express()
             }
         }
     )
-
 
     // Student
     // get spelkod by rumskod
@@ -118,10 +109,6 @@ express()
         }
     )
 
-
-
-
-
     .get('/v1/winner', async (req, res) => {
         try {
             const client = await pool.connect()
@@ -136,7 +123,6 @@ express()
         }
     })
 
-
     .get('/v1/ping', async (req, res) => {
         try {
             const client = await pool.connect()
@@ -150,10 +136,6 @@ express()
             res.send("Error " + err);
         }
     })
-
-
-
-
 
     .listen(PORT, () => console.log(`!!Listening on ${ PORT }`)) //<---denna raden ska ligga sist
 

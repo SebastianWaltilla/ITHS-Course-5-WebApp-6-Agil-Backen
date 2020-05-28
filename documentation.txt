@@ -84,7 +84,9 @@ En array skickas tillbaka:
   ]
 }
 
-
+GET/v1/ping
+Använd ping för att starta igång servern vid "index"/första sidan,
+detta gör att spelaren inte måste invänta uppstart av databas.
 
 Databas:
 
@@ -101,3 +103,9 @@ nickname (text)
 correctanswers (integer)
 totaltime (decimal)
 room (text)
+
+table:
+ping
+rows:
+id(int)
+counter(int)
