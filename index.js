@@ -141,7 +141,7 @@ express()
         try {
             const client = await pool.connect()
             const result = await client.query("SELECT counter FROM ping where id=1" );
-            const addone = result.rows[0].counter;
+            const addone = result.rows[0];
             //const increase = result + 1;
             //const result2 = await client.query("UPDATE ping SET counter = " + increase + " WHERE id=1");
             //const results = { 'Hej': (counter) ? addone : null};
@@ -154,22 +154,6 @@ express()
     })
 
 
-
-    // Student
-    // get spelkod by rumskod
-    .get('/v1/room/', async (req, res) => {
-        try {
-            var room = req.query.room;
-            const client = await pool.connect()
-            const result = await client.query("SELECT gamecode FROM gametable WHERE room = '" + room + "'");
-            //const results = { 'results': (result) ? result.rows : null};
-            res.send(result.rows[0]);
-            client.release();
-        } catch (err) {
-            console.error(err);
-            res.send("Error " + err);
-        }
-    })
 
 
 
