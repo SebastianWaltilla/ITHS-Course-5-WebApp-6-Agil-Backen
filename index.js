@@ -141,7 +141,7 @@ express()
         try {
             const client = await pool.connect()
             const result = await client.query("SELECT counter FROM ping where id=1" );
-            const counter = result.counter[0];
+            const counter = result.counter.counter;
             //const increase = result + 1;
             //const result2 = await client.query("UPDATE ping SET counter = " + increase + " WHERE id=1");
             const results = { 'counter': (counter) ? result.rows : null};
