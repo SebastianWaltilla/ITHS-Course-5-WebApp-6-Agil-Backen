@@ -117,7 +117,7 @@ express()
                 "SELECT * FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers DESC, totaltime DESC;"
             );
             //const results = { 'results': (result) ? result.rows : null};
-            res.send(result.rows[0]);
+            res.send(result);
             client.release();
         } catch (err) {
             console.error(err);
