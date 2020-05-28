@@ -109,13 +109,12 @@ express()
         }
     )
 
-    .get('/v1/winner/', async (req, res) => {
+    .get('/v1/winner', async (req, res) => {
         try {
             const client = await pool.connect()
-            var room = req.query.room;
+            var room = req.body.room;
             const result = await client.query(
-                "SELECT * FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers DESC, totaltime DESC;"
-            );
+                "SELECT * FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers DESC, totaltime DESC" );
             const results = { 'results': (result) ? result.rows : null};
             res.send(results);
             client.release();
@@ -125,7 +124,9 @@ express()
         }
     })
 
+
     .get('/v1/ping', async (req, res) => {
+
         try {
             const client = await pool.connect()
             const result = await client.query("SELECT counter FROM ping where id=1" );
