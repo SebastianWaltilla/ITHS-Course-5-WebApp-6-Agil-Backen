@@ -124,6 +124,19 @@ express()
         }
     })
 
+    .get('/v1/checkdone', async (req, res) => {
+        try {
+            const client = await pool.connect()
+            var room = req.body.room;
+            const result = await client.query("SELECT TOP 1 FROM playertable WHERE room = '" + room + " ORDER BY correctanswers ASC'" );
+            const results = { 'results': (result) ? result.rows : null};
+            res.send(results);
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    })
 
     .get('/v1/ping', async (req, res) => {
 
