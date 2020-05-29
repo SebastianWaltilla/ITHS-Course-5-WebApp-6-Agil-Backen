@@ -127,7 +127,7 @@ express()
     .get('/v1/checkdone', async (req, res) => {
         try {
             const client = await pool.connect()
-            var room = req.body.room;
+            var room = req.query.room;
             const result = await client.query("SELECT correctanswers FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers ASC LIMIT 1" );
             res.send(result.rows[0]);
             client.release();
