@@ -128,7 +128,7 @@ express()
         try {
             const client = await pool.connect()
             var room = req.body.room;
-            const result = await client.query("SELECT TOP 1 FROM playertable WHERE room = '" + room + " ORDER BY correctanswers ASC'" );
+            const result = await client.query("SELECT correctanswers FROM playertable WHERE room = '" + room + "' ORDER BY correctanswers ASC LIMIT 1" );
             const results = { 'results': (result) ? result.rows : null};
             res.send(results);
             client.release();
