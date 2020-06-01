@@ -76,7 +76,7 @@ express()
             }
 
             else {
-                res.send("You did not enter a correct roomcode ");
+                res.send({ message: "hej" });
 
                 //res.status(404).send("Room code does not match any existing room or nickname already exists");
             }
