@@ -61,6 +61,7 @@ express()
 
     .post('/v1/createplayer', async (req, res) => {
         try {
+            console.log("posting!!!!!!!!!!!!!!!!!!!")
             const client = await pool.connect()
             var room = req.body.room
             var nickname = req.body.nickname;
