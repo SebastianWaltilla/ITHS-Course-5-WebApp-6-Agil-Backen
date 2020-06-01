@@ -78,8 +78,8 @@ express()
             else {
 
 
-                //res.status(404).send("Room code does not match any existing room or nickname already exists");
-                res.send("Room code does not match any existing room or nickname already exists");
+                res.status(404).send("Room code does not match any existing room or nickname already exists");
+                //res.send("Room code does not match any existing room or nickname already exists");
             }
 
 
