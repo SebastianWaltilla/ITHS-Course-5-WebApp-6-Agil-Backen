@@ -76,9 +76,8 @@ express()
             }
 
             else {
-                res.send({ message: "hej" });
 
-                //res.status(404).send("Room code does not match any existing room or nickname already exists");
+                res.status(404).send("Room code does not match any existing room or nickname already exists");
             }
 
 
