@@ -77,7 +77,7 @@ express()
             }
 
             else {
-                var errorMessage = "{message:\"room does not exist\"}"
+                var errorMessage = '{ "error":"room not found"}'
                 var error = JSON.parse(errorMessage);
                 res.send(error);
 
