@@ -80,14 +80,14 @@ express()
             else {
                 if(checkRoom.rows.length === 1 && checkNickname.rows.length === 1 ) {
 
-                    var errorMessage = '{ "info":"Nickname already exists"}'
+                    var errorMessage = '{ "info":"Nickname already exists", "ok":"ok"}'
                     var error = JSON.parse(errorMessage);
                     res.send(error);
                 }
 
                 if(checkRoom.rows.length === 0) {
 
-                    var errorMessage = '{ "info":"Room not found"}'
+                    var errorMessage = '{ "info":"Room not found, "ok":"ok""}'
                     var error = JSON.parse(errorMessage);
                     res.send(error);
                 }
