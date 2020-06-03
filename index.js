@@ -71,7 +71,7 @@ express()
             var checkNickname = await client.query("SELECT nickname FROM playertable WHERE nickname = '" + nickname + "' limit 1");
             if(checkRoom.rows.length === 1 && checkNickname.rows.length === 0 ){
 
-            const result = await client.query("INSERT INTO playertable VALUES ('" + nickname + "'," + -1 + "," + -1 + ",'" + room +"')" );
+            const result = await client.query("INSERT INTO playertable (nickname, room) VALUES ('" + nickname + "', '"  + room +"')" );
             res.status(201).send("User with nickname " + nickname + " created");
 
             }
