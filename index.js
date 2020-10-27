@@ -91,9 +91,6 @@ express()
                     var error = JSON.parse(errorMessage);
                     res.send(error);
                 }
-
-
-
                 //res.status(404).send("Room code does not match any existing room or nickname already exists");
                 //res.send("Room code does not match any existing room or nickname already exists");
             }
@@ -171,7 +168,7 @@ express()
         }
     })
 
-    .listen(PORT, () => console.log(`!!Listening on ${ PORT }`)) //<---denna raden ska ligga sist
+    .listen(PORT, () => console.log(`!!Listening on ${ PORT }`))
 
 
 
