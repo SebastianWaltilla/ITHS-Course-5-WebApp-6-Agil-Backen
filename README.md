@@ -1,4 +1,4 @@
-# node-js-getting-started
+# node js, check index.js for code. 
 Backend using Node and express
 
 
